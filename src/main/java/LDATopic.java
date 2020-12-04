@@ -6,9 +6,6 @@ import org.apache.spark.sql.SparkSession;
 
 import java.io.IOException;
 
-/*
-    把微博文档转换成topicDistribution
- */
 public class LDATopic {
     public static void main(String[] args) {
         // Creates a SparkSession
