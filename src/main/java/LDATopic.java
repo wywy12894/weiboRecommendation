@@ -19,7 +19,7 @@ public class LDATopic {
 
         // Loads data.
         Dataset<Row> dataset = spark.read().format("libsvm")
-                .load("hdfs://hadoop-node1:9000/data/contentWithNum.txt");
+                .load("hdfs://hadoop-node1:9000/data/sample_lda_libsvm_data.txt");
 
         // Trains a LDA model.
         LDA lda = new LDA().setK(100).setMaxIter(100);
@@ -41,8 +41,8 @@ public class LDATopic {
         transformed.show();
 
         try {
-            model.write().overwrite().save("hdfs://hadoop-node1:9000/model/LDAModel");
-            transformed.write().parquet("hdfs://hadoop-node1:9000/model/docRepresentation.parquet");
+            model.write().overwrite().save("hdfs://hadoop-node1:9000/model/LDAModelExample");
+            transformed.write().parquet("hdfs://hadoop-node1:9000/model/docRepresentationExample.parquet");
         } catch (IOException e) {
             e.printStackTrace();
         }
