@@ -16,7 +16,7 @@ public class LDATopic {
                 .getOrCreate();
 
         // contentWithNum
-        String filepath1 = "hdfs://hadoop-node1:9000/data/contentWithNum.txt";
+        String filepath1 = "hdfs://hadoop-node1:9000/data/content.txt";
         // LDAModel
         String filepath2 = "hdfs://hadoop-node1:9000/model/LDAModelExample";
         // TopicDistribution
