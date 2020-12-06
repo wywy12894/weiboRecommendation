@@ -41,8 +41,7 @@ public class LDATopic {
         topics.show();
 
         // Shows the result.
-        Dataset<Row> transformed = model.transform(dataset);
-        transformed.drop("features");
+        Dataset<Row> transformed = model.transform(dataset).drop("features");
         transformed.show();
 
         try {
