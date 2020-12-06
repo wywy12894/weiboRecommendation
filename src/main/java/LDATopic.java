@@ -7,6 +7,7 @@ import org.apache.spark.sql.SparkSession;
 import java.io.IOException;
 
 public class LDATopic {
+
     public static void main(String[] args) {
         // Creates a SparkSession
         SparkSession spark = SparkSession
@@ -14,12 +15,19 @@ public class LDATopic {
                 .appName("LDATopic")
                 .getOrCreate();
 
+        // contentWithNum
+        String filepath1 = "hdfs://hadoop-node1:9000/data/contentWithNum.txt";
+        // LDAModel
+        String filepath2 = "hdfs://hadoop-node1:9000/model/LDAModelExample";
+        // TopicDistribution
+        String filepath3 = "hdfs://hadoop-node1:9000/model/docRepresentationExample.parquet";
+
         // Loads data.
         Dataset<Row> dataset = spark.read().format("libsvm")
-                .load("hdfs://hadoop-node1:9000/data/sample_lda_libsvm_data.txt");
+                .load(filepath1);
 
         // Trains a LDA model.
-        LDA lda = new LDA().setK(100).setMaxIter(100);
+        LDA lda = new LDA().setK(3).setMaxIter(10);
         LDAModel model = lda.fit(dataset);
 
         double ll = model.logLikelihood(dataset);
@@ -28,7 +36,7 @@ public class LDATopic {
         System.out.println("The upper bound on perplexity: " + lp);
 
         // Describe topics.
-        Dataset<Row> topics = model.describeTopics(10);
+        Dataset<Row> topics = model.describeTopics(3);
         System.out.println("The topics described by their top-weighted terms:");
         topics.show();
 
@@ -38,8 +46,8 @@ public class LDATopic {
         transformed.show();
 
         try {
-            model.write().overwrite().save("hdfs://hadoop-node1:9000/model/LDAModelExample");
-            transformed.write().parquet("hdfs://hadoop-node1:9000/model/docRepresentationExample.parquet");
+            model.write().overwrite().save(filepath2);
+            transformed.write().parquet(filepath3);
         } catch (IOException e) {
             e.printStackTrace();
         }
