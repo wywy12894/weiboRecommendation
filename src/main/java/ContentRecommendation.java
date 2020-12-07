@@ -40,14 +40,14 @@ public class ContentRecommendation {
                 functions.callUDF("cos_func", col("topicDistribution"), col("mean(topicDistribution)")));
         documents.show();
         // sort by cosine distance
-        Dataset<Row> output = documents.sort(col("cosine").desc()).limit(5);
+        Dataset<Row> output = documents.sort(col("cosine").desc()).limit(10);
         output = output.drop("topicDistribution").drop("mean(topicDistribution)");
-        output.show();
+        output.show(false);
 
         // Load original weibo content
-        Dataset<Row> rootcontent = spark.read().parquet("hdfs://hadoop-node1:9000/model/rootContent.parquet");
-        output = output.join(rootcontent);
-        output.show();
+//        Dataset<Row> rootcontent = spark.read().parquet("hdfs://hadoop-node1:9000/model/rootContent.parquet");
+//        output = output.join(rootcontent);
+//        output.show();
         output.write().json(filepath5);
 
 
