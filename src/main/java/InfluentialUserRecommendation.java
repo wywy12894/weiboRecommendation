@@ -18,8 +18,11 @@ public class InfluentialUserRecommendation {
                 .appName("InfluentialUserRecommendation")
                 .getOrCreate();
 
+//        String filepath6 = "hdfs://hadoop-node1:9000/data/followers.txt";
+        String filepath6 = "/usr/project/SimpleProject/data/followers.txt";
+
         JavaRDD<Edge<String>> edgeJavaRDD = spark.read()
-                .textFile("hdfs://hadoop-node1:9000/data/followers.txt")
+                .textFile(filepath6)
                 .javaRDD()
                 .map(line->{
                     String[] pair = line.split(" ");
@@ -48,9 +51,7 @@ public class InfluentialUserRecommendation {
             System.out.println(tuple._1() + " has rank: " + tuple._2() + ".");
         }
         System.out.println("=====================================");
-
-
-
+        
         spark.stop();
     }
 }
