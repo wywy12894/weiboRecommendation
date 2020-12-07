@@ -36,7 +36,7 @@ public class InfluentialUserRecommendation {
         Graph<String,String> followGraph = Graph.fromEdges(edgeRDD, "", StorageLevel.MEMORY_ONLY(),
                 StorageLevel.MEMORY_ONLY(), stringTag, stringTag);
 
-        Graph<Object,Object> result1 = PageRank.run(followGraph, 50, 0.01, stringTag, stringTag);
+        Graph<Object,Object> result1 = PageRank.run(followGraph, 20, 0.01, stringTag, stringTag);
 
 
         System.out.println("=====================================");
@@ -51,7 +51,7 @@ public class InfluentialUserRecommendation {
             System.out.println(tuple._1() + " has rank: " + tuple._2() + ".");
         }
         System.out.println("=====================================");
-        
+
         spark.stop();
     }
 }
