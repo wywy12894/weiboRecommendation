@@ -40,7 +40,7 @@ public class RelativeUserRecommendation {
         Graph<String,String> followGraph = Graph.fromEdges(edgeRDD, "", StorageLevel.MEMORY_ONLY(),
                 StorageLevel.MEMORY_ONLY(), stringTag, stringTag);
 
-        Graph<Object,String> result2 = LabelPropagation.run(followGraph, 10, stringTag);
+        Graph<Object,String> result2 = LabelPropagation.run(followGraph, 5, stringTag);
 
 
         System.out.println("=====================================");
