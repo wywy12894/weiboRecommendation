@@ -28,7 +28,7 @@ public class LDATopic {
                 .load(filepath1);
 
         // Trains a LDA model.
-        LDA lda = new LDA().setK(20).setMaxIter(50);
+        LDA lda = new LDA().setK(50).setMaxIter(100);
         LDAModel model = lda.fit(dataset);
 
         double ll = model.logLikelihood(dataset);
