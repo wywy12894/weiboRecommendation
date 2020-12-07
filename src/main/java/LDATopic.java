@@ -19,9 +19,9 @@ public class LDATopic {
 //        String filepath1 = "hdfs://hadoop-node1:9000/data/content.txt";
         String filepath1 = "/usr/project/data/content.txt";
         // LDAModel
-        String filepath2 = "/usr/project/model/LDAModelExample";
+        String filepath2 = "/usr/project/model/LDAModelExample2";
         // TopicDistribution
-        String filepath3 = "/usr/project/model/docRepresentationExample.parquet";
+        String filepath3 = "/usr/project/model/docRepresentationExample2.parquet";
 
         // Loads data.
         Dataset<Row> dataset = spark.read().format("libsvm")

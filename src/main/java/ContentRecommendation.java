@@ -18,7 +18,7 @@ public class ContentRecommendation {
                 .getOrCreate();
 
         // TopicDistribution
-        String filepath3 = "/usr/project/model/docRepresentationExample.parquet";
+        String filepath3 = "/usr/project/model/docRepresentationExample2.parquet";
         // input
         String filepath4 = "/usr/project/data/input.txt";
         // output
