@@ -38,7 +38,7 @@ public class LDATopic {
         // Describe topics.
         Dataset<Row> topics = model.describeTopics(5);
         System.out.println("The topics described by their top-weighted terms:");
-        topics.show();
+        topics.show(false);
 
         // Shows the result.
         Dataset<Row> transformed = model.transform(dataset).drop("features");
