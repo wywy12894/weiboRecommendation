@@ -36,7 +36,7 @@ public class LDATopic {
         System.out.println("The upper bound on perplexity: " + lp);
 
         // Describe topics.
-        Dataset<Row> topics = model.describeTopics(3);
+        Dataset<Row> topics = model.describeTopics(5);
         System.out.println("The topics described by their top-weighted terms:");
         topics.show();
 
