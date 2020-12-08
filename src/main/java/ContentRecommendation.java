@@ -18,13 +18,13 @@ public class ContentRecommendation {
                 .getOrCreate();
 
         // TopicDistribution
-        String filepath3 = "/usr/project/model/docRepresentationExample2.parquet";
+        String filepath3 = "hdfs://hadoop-node1:9000/model/docRepresentationExample.parquet";
         // input
-        String filepath4 = "/usr/project/data/input.txt";
+        String filepath4 = "hdfs://hadoop-node1:9000/data/input.txt";
         // output
-        String filepath5 = "/usr/project/data/output.json";
+        String filepath5 = "hdfs://hadoop-node1:9000/data/output.json";
         // Chinese
-        String filepath7 = "/usr/project/model/rootContent.parquet";
+        String filepath7 = "hdfs://hadoop-node1:9000/model/rootContent.parquet";
 
         // Load document vector
         Dataset<Row> documents = spark.read().parquet(filepath3);

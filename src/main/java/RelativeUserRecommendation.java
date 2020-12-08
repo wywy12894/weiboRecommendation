@@ -25,8 +25,8 @@ public class RelativeUserRecommendation {
                 .appName("RelativeUserRecommendation")
                 .getOrCreate();
 
-//        String filepath6 = "hdfs://hadoop-node1:9000/data/followers.txt";
-        String filepath6 = "/usr/project/data/followers.txt";
+        String filepath6 = "hdfs://hadoop-node1:9000/data/followers.txt";
+//        String filepath6 = "/usr/project/data/followers.txt";
 
         JavaRDD<Edge<String>> edgeJavaRDD = spark.read()
                 .textFile(filepath6)
