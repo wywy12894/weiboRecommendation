@@ -45,7 +45,8 @@ public class WeiboTxt2Parquet {
                     String[] parts = line.split("\t");
                     Weibo weibo = new Weibo();
                     weibo.setLabel(Double.parseDouble(parts[0].trim()));
-                    weibo.setConetnt(parts[1].trim());
+                    if (parts.length >= 2)
+                        weibo.setConetnt(parts[1].trim());
                     return weibo;
                 });
 
