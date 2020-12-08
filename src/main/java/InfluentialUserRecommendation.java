@@ -40,7 +40,7 @@ public class InfluentialUserRecommendation {
 
         Graph<Object,Object> result1 = PageRank.run(followGraph, 20, 0.01, stringTag, stringTag);
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter("usr/project/output/InfluentialUserRecommendationOutput.txt"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("/usr/project/output/InfluentialUserRecommendationOutput.txt"));
         System.out.println("=====================================");
         JavaRDD<Tuple2<Object, Object>> v = result1.vertices().toJavaRDD()
                 .sortBy(tuple->tuple._2, false, 0);
