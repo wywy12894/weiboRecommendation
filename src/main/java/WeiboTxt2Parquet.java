@@ -34,9 +34,9 @@ public class WeiboTxt2Parquet {
                 .appName("WeiboTxt2Parquet")
                 .getOrCreate();
 
-        String filepath8 = "/usr/project/data/rootcontent.txt";
+        String filepath8 = "/data/rootcontent.txt";
  //       String filepath8 = "/usr/project/data/root_content.txt";
-        String filepath7 = "/usr/project/model/rootContent.parquet";
+        String filepath7 = "/model/rootContent.parquet";
 
         JavaRDD<Weibo> weiboRDD = spark.read()
                 .textFile(filepath8)
