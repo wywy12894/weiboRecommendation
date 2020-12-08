@@ -48,7 +48,7 @@ public class ContentRecommendation {
 
         // Load original weibo content
         Dataset<Row> rootcontent = spark.read().parquet(filepath7);
-        output = output.join(rootcontent);
+        output = output.join(rootcontent, "label");
         output.show();
         output.write().json(filepath5);
 
