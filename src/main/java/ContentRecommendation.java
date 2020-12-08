@@ -22,9 +22,9 @@ public class ContentRecommendation {
         // input
         String filepath4 = "/usr/project/data/input.txt";
         // output
-        String filepath5 = "/usr/project/data/ContentRecommendationOutput.txt";
+        String filepath5 = "/usr/project/output/ContentRecommendationOutput.txt";
         // Chinese
-        String filepath7 = "/usr/project/data/rootContent.parquet";
+        String filepath7 = "/usr/project/model/rootContent.parquet";
 
         // Load document vector
         Dataset<Row> documents = spark.read().parquet(filepath3);
