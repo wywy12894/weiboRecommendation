@@ -24,7 +24,7 @@ public class ContentRecommendation {
         // output
         String filepath5 = "/usr/project/data/ContentRecommendationOutput.txt";
         // Chinese
-        String filepath7 = "/usr/project/model/rootContent.parquet";
+        String filepath7 = "/usr/project/data/rootContent.parquet";
 
         // Load document vector
         Dataset<Row> documents = spark.read().parquet(filepath3);
