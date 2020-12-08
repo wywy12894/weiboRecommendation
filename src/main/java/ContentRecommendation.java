@@ -10,6 +10,7 @@ import org.apache.spark.sql.types.DataTypes;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 import static org.apache.spark.sql.functions.col;
 
@@ -56,14 +57,15 @@ public class ContentRecommendation {
         output.show();
 //        output.write().text(filepath5);
         BufferedWriter bw = new BufferedWriter(new FileWriter(filepath5));
-        output.sort(col("cosine").desc()).foreach(row->{
+        List<Row> sth = output.sort(col("cosine").desc()).toJavaRDD().collect();
+        for(Row row: sth){
             bw.write(row.get(row.fieldIndex("label")).toString());
             bw.write("\t");
             bw.write(row.get(row.fieldIndex("cosine")).toString());
             bw.write("\t");
             bw.write(row.get(row.fieldIndex("content")).toString());
             bw.newLine();
-        });
+        }
         bw.close();
 
 
