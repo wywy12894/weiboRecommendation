@@ -34,8 +34,12 @@ public class WeiboTxt2Parquet {
                 .appName("WeiboTxt2Parquet")
                 .getOrCreate();
 
+//        String filepath8 = "hdfs://hadoop-node1:9000/data/rootcontent.txt";
+        String filepath8 = "/usr/project/data/rootcontent.txt";
+        String filepath7 = "/usr/project/model/rootContent.parquet";
+
         JavaRDD<Weibo> weiboRDD = spark.read()
-                .textFile("hdfs://hadoop-node1:9000/data/rootcontent.txt")
+                .textFile()
                 .javaRDD()
                 .map(line -> {
                     String[] parts = line.split("\t");
@@ -48,7 +52,7 @@ public class WeiboTxt2Parquet {
         // Apply a schema to an RDD of JavaBeans to get a DataFrame
         Dataset<Row> peopleDF = spark.createDataFrame(weiboRDD, Weibo.class);
         peopleDF.show();
-        peopleDF.write().parquet("hdfs://hadoop-node1:9000/model/rootContent.parquet");
+        peopleDF.write().parquet(filepath7);
 
         spark.stop();
     }

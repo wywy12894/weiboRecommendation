@@ -18,8 +18,8 @@ public class InfluentialUserRecommendation {
                 .appName("InfluentialUserRecommendation")
                 .getOrCreate();
 
-        String filepath6 = "hdfs://hadoop-node1:9000/data/followers.txt";
-//        String filepath6 = "/usr/project/SimpleProject/data/followers.txt";
+//        String filepath6 = "hdfs://hadoop-node1:9000/data/followers.txt";
+        String filepath6 = "/usr/project/SimpleProject/data/followers.txt";
 
         JavaRDD<Edge<String>> edgeJavaRDD = spark.read()
                 .textFile(filepath6)
@@ -29,7 +29,6 @@ public class InfluentialUserRecommendation {
                     return new Edge<>(Integer.parseInt(pair[0].trim()), Integer.parseInt(pair[1].trim()), "follow");
                 });
         RDD<Edge<String>> edgeRDD = JavaRDD.toRDD(edgeJavaRDD);
-
 
         ClassTag<String> stringTag = scala.reflect.ClassTag$.MODULE$.apply(String.class);
 

@@ -23,6 +23,8 @@ public class ContentRecommendation {
         String filepath4 = "/usr/project/data/input.txt";
         // output
         String filepath5 = "/usr/project/data/output.json";
+        // Chinese
+        String filepath7 = "/usr/project/model/rootContent.parquet";
 
         // Load document vector
         Dataset<Row> documents = spark.read().parquet(filepath3);
@@ -45,9 +47,9 @@ public class ContentRecommendation {
         output.show(false);
 
         // Load original weibo content
-//        Dataset<Row> rootcontent = spark.read().parquet("hdfs://hadoop-node1:9000/model/rootContent.parquet");
-//        output = output.join(rootcontent);
-//        output.show();
+        Dataset<Row> rootcontent = spark.read().parquet(filepath7);
+        output = output.join(rootcontent);
+        output.show();
         output.write().json(filepath5);
 
 
