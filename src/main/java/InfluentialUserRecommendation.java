@@ -8,17 +8,20 @@ import org.apache.spark.storage.StorageLevel;
 import scala.Tuple2;
 import scala.reflect.ClassTag;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class InfluentialUserRecommendation {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         // Creates a SparkSession
         SparkSession spark = SparkSession
                 .builder()
                 .appName("InfluentialUserRecommendation")
                 .getOrCreate();
 
-        String filepath6 = "hdfs://hadoop-node1:9000/data/followers.txt";
+        String filepath6 = "/usr/project/data/followers.txt";
 //        String filepath6 = "/usr/project/data/followers.txt";
 
         JavaRDD<Edge<String>> edgeJavaRDD = spark.read()
@@ -37,7 +40,7 @@ public class InfluentialUserRecommendation {
 
         Graph<Object,Object> result1 = PageRank.run(followGraph, 20, 0.01, stringTag, stringTag);
 
-
+        BufferedWriter bw = new BufferedWriter(new FileWriter("/usr/project/output/InfluentialUserRecommendationOutput.txt"));
         System.out.println("=====================================");
         JavaRDD<Tuple2<Object, Object>> v = result1.vertices().toJavaRDD()
                 .sortBy(tuple->tuple._2, false, 0);
@@ -47,10 +50,14 @@ public class InfluentialUserRecommendation {
             if(index > 10)
                 break;
             index++;
-            System.out.println(tuple._1() + " has rank: " + tuple._2() + ".");
+            bw.write(tuple._1().toString());
+            bw.write(" has rank: ");
+            bw.write(tuple._2().toString());
+            bw.newLine();
+//            System.out.println(tuple._1() + " has rank: " + tuple._2() + ".");
         }
         System.out.println("=====================================");
-
+        bw.close();
         spark.stop();
     }
 }

@@ -9,12 +9,15 @@ import org.apache.spark.storage.StorageLevel;
 import scala.Tuple2;
 import scala.reflect.ClassTag;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class RelativeUserRecommendation {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         if (args.length < 1) {
             System.err.println("input user");
             System.exit(1);
@@ -25,7 +28,7 @@ public class RelativeUserRecommendation {
                 .appName("RelativeUserRecommendation")
                 .getOrCreate();
 
-        String filepath6 = "hdfs://hadoop-node1:9000/data/followers.txt";
+        String filepath6 = "/usr/project/data/followers.txt";
 //        String filepath6 = "/usr/project/data/followers.txt";
 
         JavaRDD<Edge<String>> edgeJavaRDD = spark.read()
@@ -59,7 +62,9 @@ public class RelativeUserRecommendation {
                 .filter(tuple-> ! neighbors.contains((long)tuple._1())).collect();
         System.out.println(res);
         System.out.println("=====================================");
-
+        BufferedWriter bw = new BufferedWriter(new FileWriter("/usr/project/output/RelativeUserRecommendation.txt"));
+        bw.write(res.toString());
+        bw.close();
 
         spark.stop();
     }
