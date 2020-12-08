@@ -27,7 +27,7 @@ public class ContentRecommendation {
         // input
         String filepath4 = "/data/input.txt";
         // output
-        String filepath5 = "output/ContentRecommendationOutput.txt";
+        String filepath5 = "/usr/project/output/ContentRecommendationOutput.txt";
         // Chinese
         String filepath7 = "/model/rootContent.parquet";
 
