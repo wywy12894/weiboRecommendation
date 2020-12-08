@@ -39,7 +39,7 @@ public class WeiboTxt2Parquet {
         String filepath7 = "/usr/project/model/rootContent.parquet";
 
         JavaRDD<Weibo> weiboRDD = spark.read()
-                .textFile()
+                .textFile(filepath8)
                 .javaRDD()
                 .map(line -> {
                     String[] parts = line.split("\t");
@@ -50,9 +50,9 @@ public class WeiboTxt2Parquet {
                 });
 
         // Apply a schema to an RDD of JavaBeans to get a DataFrame
-        Dataset<Row> peopleDF = spark.createDataFrame(weiboRDD, Weibo.class);
-        peopleDF.show();
-        peopleDF.write().parquet(filepath7);
+        Dataset<Row> weiboDF = spark.createDataFrame(weiboRDD, Weibo.class);
+        weiboDF.show();
+        weiboDF.write().parquet(filepath7);
 
         spark.stop();
     }
