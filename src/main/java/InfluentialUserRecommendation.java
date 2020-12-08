@@ -21,7 +21,7 @@ public class InfluentialUserRecommendation {
                 .appName("InfluentialUserRecommendation")
                 .getOrCreate();
 
-        String filepath6 = "/usr/project/data/followers.txt";
+        String filepath6 = "/data/followers.txt";
 //        String filepath6 = "/usr/project/data/followers.txt";
 
         JavaRDD<Edge<String>> edgeJavaRDD = spark.read()
@@ -40,7 +40,7 @@ public class InfluentialUserRecommendation {
 
         Graph<Object,Object> result1 = PageRank.run(followGraph, 20, 0.01, stringTag, stringTag);
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter("/usr/project/output/InfluentialUserRecommendationOutput.txt"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("/output/InfluentialUserRecommendationOutput.txt"));
         System.out.println("=====================================");
         JavaRDD<Tuple2<Object, Object>> v = result1.vertices().toJavaRDD()
                 .sortBy(tuple->tuple._2, false, 0);

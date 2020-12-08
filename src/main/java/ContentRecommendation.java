@@ -18,13 +18,13 @@ public class ContentRecommendation {
                 .getOrCreate();
 
         // TopicDistribution
-        String filepath3 = "/usr/project/model/docRepresentationExample.parquet";
+        String filepath3 = "/model/docRepresentationExample.parquet";
         // input
-        String filepath4 = "/usr/project/data/input.txt";
+        String filepath4 = "/data/input.txt";
         // output
-        String filepath5 = "/usr/project/output/ContentRecommendationOutput.txt";
+        String filepath5 = "/output/ContentRecommendationOutput.txt";
         // Chinese
-        String filepath7 = "/usr/project/model/rootContent.parquet";
+        String filepath7 = "/model/rootContent.parquet";
 
         // Load document vector
         Dataset<Row> documents = spark.read().parquet(filepath3);
