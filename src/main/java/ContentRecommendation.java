@@ -7,10 +7,14 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.functions;
 import org.apache.spark.sql.types.DataTypes;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import static org.apache.spark.sql.functions.col;
 
 public class ContentRecommendation {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Creates a SparkSession
         SparkSession spark = SparkSession
                 .builder()
@@ -22,7 +26,7 @@ public class ContentRecommendation {
         // input
         String filepath4 = "/data/input.txt";
         // output
-        String filepath5 = "/output/ContentRecommendationOutput.txt";
+        String filepath5 = "output/ContentRecommendationOutput.txt";
         // Chinese
         String filepath7 = "/model/rootContent.parquet";
 
@@ -50,7 +54,17 @@ public class ContentRecommendation {
         Dataset<Row> rootcontent = spark.read().parquet(filepath7);
         output = output.join(rootcontent, "label");
         output.show();
-        output.write().text(filepath5);
+//        output.write().text(filepath5);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(filepath5));
+        output.sort(col("cosine").desc()).foreach(row->{
+            bw.write(row.get(row.fieldIndex("label")).toString());
+            bw.write("\t");
+            bw.write(row.get(row.fieldIndex("cosine")).toString());
+            bw.write("\t");
+            bw.write(row.get(row.fieldIndex("content")).toString());
+            bw.newLine();
+        });
+        bw.close();
 
 
         spark.stop();

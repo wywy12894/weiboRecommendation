@@ -62,7 +62,7 @@ public class RelativeUserRecommendation {
                 .filter(tuple-> ! neighbors.contains((long)tuple._1())).collect();
         System.out.println(res);
         System.out.println("=====================================");
-        BufferedWriter bw = new BufferedWriter(new FileWriter("/output/RelativeUserRecommendation.txt"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("/usr/project/output/RelativeUserRecommendation.txt"));
         bw.write(res.toString());
         bw.close();
 
